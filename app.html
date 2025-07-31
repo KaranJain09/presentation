@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Journey Roadmap</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .presentation-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slide {
+        display: none;
+        width: 95%;
+        max-width: 1400px;
+        height: 88%;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        padding: 30px 45px; /* MODIFIED: Reduced vertical padding */
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        animation: slideIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .slide h1 {
+        font-size: 3.5rem;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 30px;
+        animation: bounceGlow 2s infinite;
+        background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: bounceGlow 2s infinite, colorShift 4s ease-in-out infinite;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        font-weight: 800;
+    }
+
+    @keyframes bounceGlow {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        40% {
+            transform: translateY(-15px) scale(1.05);
+        }
+        60% {
+            transform: translateY(-8px) scale(1.02);
+        }
+    }
+
+    @keyframes colorShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .slide h2 {
+        font-size: 2.4rem; /* MODIFIED: Reduced font size */
+        color: #fff;
+        text-align: center;
+        margin-bottom: 20px; /* MODIFIED: Adjusted margin */
+        background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInUp 1s ease-out, colorShift 4s ease-in-out infinite;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        font-weight: 700;
+    }
+
+    .intro-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60%;
+    }
+
+    .intro-text {
+        flex: 1;
+        padding-right: 50px;
+    }
+
+    .intro-text h3 {
+        font-size: 2.2rem;
+        color: #fff;
+        margin-bottom: 15px;
+        animation: fadeInUp 1.2s ease-out;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        font-weight: 700;
+    }
+
+    .intro-text p {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 15px;
+        animation: fadeInUp 1.4s ease-out;
+        line-height: 1.6;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+    }
+
+    .avatar {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #ff6b6b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8rem;
+        color: white;
+        animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 
+                    0 0 0 10px rgba(255, 255, 255, 0.1),
+                    0 0 0 20px rgba(255, 255, 255, 0.05);
+        position: relative;
+    }
+
+    .avatar::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #ff6b6b);
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(20px);
+        animation: rotate 8s linear infinite reverse;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .journey-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .journey-item {
+        background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb);
+        background-size: 200% 200%;
+        padding: 25px;
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+        transform: translateY(50px);
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards, gradientMove 3s ease-in-out infinite;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
+                    0 5px 15px rgba(255, 107, 107, 0.4);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .journey-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+        border-radius: 20px;
+    }
+
+    .journey-item:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 
+                    0 10px 25px rgba(255, 107, 107, 0.6);
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .journey-item:nth-child(1) { animation-delay: 0.2s; }
+    .journey-item:nth-child(2) { animation-delay: 0.4s; }
+    .journey-item:nth-child(3) { animation-delay: 0.6s; }
+    .journey-item:nth-child(4) { animation-delay: 0.8s; }
+
+    .journey-item h4 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .journey-item p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* --- START OF MODIFICATIONS FOR SLIDE 3 --- */
+    .roadmap-container {
+        position: relative;
+    }
+
+    /* MODIFIED: This is now a 2-column grid */
+    .roadmap-path {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px; /* Controls spacing between all items */
+    }
+
+    .roadmap-step {
+        display: flex;
+        flex-direction: column; /* MODIFIED: Stack number and content vertically */
+        align-items: center; /* MODIFIED: Center items */
+        text-align: center;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out forwards;
+        /* Removed margin-bottom and transforms, as the grid handles layout */
+    }
+    
+    /* REMOVED: The alternating :nth-child(odd/even) rules are no longer needed */
+
+    .roadmap-step:nth-child(1) { animation-delay: 0.2s; }
+    .roadmap-step:nth-child(2) { animation-delay: 0.3s; }
+    .roadmap-step:nth-child(3) { animation-delay: 0.4s; }
+    .roadmap-step:nth-child(4) { animation-delay: 0.5s; }
+    .roadmap-step:nth-child(5) { animation-delay: 0.6s; }
+    .roadmap-step:nth-child(6) { animation-delay: 0.7s; }
+
+    .step-number {
+        width: 35px; /* MODIFIED: Reduced size */
+        height: 35px; /* MODIFIED: Reduced size */
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem; /* MODIFIED: Reduced font size */
+        font-weight: bold;
+        color: white;
+        margin: 0 0 10px 0; /* MODIFIED: Margin is now on the bottom */
+        animation: pulseRainbow 2s infinite, rotate 6s linear infinite;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                    0 0 0 5px rgba(255, 255, 255, 0.2);
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .step-number::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(10px);
+        animation: rotate 4s linear infinite reverse;
+    }
+
+    @keyframes pulseRainbow {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    .step-content {
+        flex: 1;
+        background: linear-gradient(135deg, #a8edea, #fed6e3, #d299c2, #fef9d7);
+        background-size: 300% 300%;
+        padding: 15px; /* MODIFIED: Reduced padding */
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        animation: backgroundShift 5s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+        width: 100%; /* Ensure content box takes full width of grid cell */
+    }
+
+    .step-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: stepShimmer 4s infinite;
+    }
+
+    @keyframes backgroundShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes stepShimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .step-content h4 {
+        font-size: 1.2rem; /* MODIFIED: Reduced font size */
+        color: #2c3e50;
+        margin-bottom: 8px; /* MODIFIED: Reduced margin */
+    }
+
+    .step-content p {
+        color: #34495e;
+        line-height: 1.4; /* MODIFIED: Reduced line height */
+        font-size: 0.9rem; /* MODIFIED: Reduced font size */
+    }
+    /* --- END OF MODIFICATIONS FOR SLIDE 3 --- */
+
+    .thanks-container {
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .thanks-emoji {
+        font-size: 5rem;
+        margin-bottom: 30px;
+        animation: bounce 2s infinite;
+    }
+
+    .qr-container {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        margin-top: 40px;
+    }
+
+    .qr-item {
+        text-align: center;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .qr-item:nth-child(2) {
+        animation-delay: 1.5s;
+    }
+
+    .qr-placeholder {
+        width: 180px;
+        height: 180px;
+        background: conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #667eea);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                    0 0 0 5px rgba(255, 255, 255, 0.1);
+        animation: qrPulse 3s ease-in-out infinite;
+        position: relative;
+    }
+
+    .qr-placeholder::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        background: conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #667eea);
+        border-radius: 25px;
+        z-index: -1;
+        filter: blur(15px);
+        animation: rotate 8s linear infinite;
+    }
+
+    @keyframes qrPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    .navigation {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 25px;
+        z-index: 1000;
+    }
+
+    .nav-arrow {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52, #ff4757);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.8rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        animation: arrowPulse 2s infinite;
+    }
+
+    .nav-arrow:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        background: linear-gradient(135deg, #ff4757, #ff3742);
+    }
+
+    .nav-arrow:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        transform: none;
+        animation: none;
+    }
+
+    @keyframes arrowPulse {
+        0%, 100% {
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+        50% {
+            box-shadow: 0 8px 35px rgba(255, 107, 107, 0.7);
+        }
+    }
+
+    .slide-indicator {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-weight: bold;
+        color: white;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: indicatorPulse 3s ease-in-out infinite;
+        font-size: 1rem;
+    }
+
+    @keyframes indicatorPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .floating-emojis {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .floating-emoji {
+        position: absolute;
+        font-size: 2rem;
+        animation: floatAcross 10s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatAcross {
+        0% {
+            transform: translateX(-100px) translateY(0px);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.7;
+        }
+        90% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateX(calc(100vw + 100px)) translateY(-200px);
+            opacity: 0;
+        }
+    }
+
+    .intro-animation {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 3rem;
+        animation: bounce 2s infinite;
+    }
+    .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fills the box without distortion */
+            border-radius: 25px; /* Matches the container's rounded corners */
+        }
+</style>
+</head>
+<body>
+    <div class="floating-emojis" id="floatingEmojis"></div>
+    
+    <div class="presentation-container">
+        <div class="slide-indicator" id="slideIndicator">1 / 4</div>
+        
+        <!-- Slide 1: Introduction -->
+        <div class="slide active">
+            <div class="intro-animation">👋</div>
+            <h1>From Classroom to Career: Let’s Begin</h1>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h3>Hi, I'm Karan Jain 🚀</h3>
+                    <p><strong>Domain:</strong> Data scientist 💻</p>
+                    <p><strong>Current Compay:</strong> Data Science Wizards (DSW)</p>
+                    <p><strong>Pass-out:</strong> 2024-25 (I.T.)</p>
+                </div>
+                <div class="avatar">👨‍💻</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: My Journey -->
+        <div class="slide">
+            <div class="intro-animation">🗺️</div>
+            <h2>My Placement Journey 🚀</h2>
+            <div class="journey-grid">
+                <div class="journey-item">
+                    <h4>🧠 Aptitude</h4>
+                    <p>quantitative, logical reasoning, and verbal sections. Daily practice with mock tests and time management techniques!</p>
+                </div>
+                <div class="journey-item">
+                    <h4>🔥 DSA </h4>
+                    <p>Problems on LeetCode, HackerRank & GeeksforGeeks. From arrays to dynamic programming - covered it all!</p>
+                </div>
+                <div class="journey-item">
+                    <h4>💼 Project Portfolio</h4>
+                    <p>Built 5+ real-world projects showcasing different technologies.</p>
+                </div>
+                <div class="journey-item">
+                    <h4>🗣️ Soft Skills & Communication</h4>
+                    <p>Worked on presentation skills, group discussions, and interview confidence. Practice makes perfect!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Roadmap for Students -->
+        <div class="slide">
+            <div class="intro-animation">🛣️</div>
+            <!-- <h2>Your Roadmap to Success 🎯</h2> -->
+            <div class="roadmap-container">
+                <div class="roadmap-path">
+                    <div class="roadmap-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>📄 Resume Building</h4>
+                            <p>Create an ATS-friendly resume with proper formatting, relevant skills, and quantified achievements. Your first impression matters!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>🎭 Soft Skills & Aptitude</h4>
+                            <p>Master communication, teamwork, and problem-solving. Practice aptitude daily - speed and accuracy are key!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>⚡ DSA Mastery</h4>
+                            <p>LeetCode, HackerRank, CodeChef - make them your best friends! Start with basics, progress to advanced topics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>🎯 Find Your Domain</h4>
+                            <p>Explore different fields - Frontend, Backend, Data Science, DevOps. Choose what excites you most!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>🚀 Project Development</h4>
+                            <p>Build projects that showcase your skills. Quality over quantity - make each project portfolio-worthy!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>💼 Professional Presence</h4>
+                            <p>Optimize LinkedIn profile, maintain active GitHub, practice mock interviews. Network and stay consistent!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Thank You -->
+<div class="slide">
+            <div class="thanks-container">
+                <h2>Thank You!</h2>      
+                <div class="qr-container">
+                    <div class="qr-item">
+                        <p style="font-weight: bold; color: #2c3e50; margin-bottom: 20px;">LinkedIn</p>
+                        <div class="qr-placeholder">
+                            <img src="linkedin-qr.jpeg" alt="LinkedIn QR Code">
+                        </div>
+                        <p style="font-weight: bold; color: #2c3e50;">Connect on LinkedIn</p>
+                    </div>
+                    
+                    <div class="qr-item">
+                        <p style="font-weight: bold; color: #2c3e50; margin-bottom: 20px;">GitHub</p>
+                        <div class="qr-placeholder">
+                            <img src="github-qr.jpeg" alt="GitHub QR Code">
+                        </div>
+                        <p style="font-weight: bold; color: #2c3e50;">Check My Projects</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 30px; font-size: 1.1rem; color: #020202;">
+                    Feel free to reach out for any guidance! 🤝
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="navigation">
+        <button class="nav-arrow" id="prevBtn" onclick="changeSlide(-1)">‹</button>
+        <button class="nav-arrow" id="nextBtn" onclick="changeSlide(1)">›</button>
+    </div> -->
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Create floating emojis
+        const emojis = ['💻', '🚀', '💡', '🎯', '⭐', '🔥', '💪', '🌟', '📚', '🏆'];
+        
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'floating-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.top = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 10 + 's';
+            emoji.style.animationDuration = (8 + Math.random() * 4) + 's';
+            
+            document.getElementById('floatingEmojis').appendChild(emoji);
+            
+            setTimeout(() => {
+                emoji.remove();
+            }, 12000);
+        }
+
+        // Create floating emojis periodically
+        setInterval(createFloatingEmoji, 3000);
+
+        function updateSlideIndicator() {
+            document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            updateSlideIndicator();
+            updateNavigationButtons();
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            
+            if (newSlide >= 0 && newSlide < totalSlides) {
+                currentSlide = newSlide;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        updateSlideIndicator();
+        updateNavigationButtons();
+
+        // Add some initial floating emojis
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createFloatingEmoji, i * 1000);
+        }
+    </script>
+</body>
+</html>
